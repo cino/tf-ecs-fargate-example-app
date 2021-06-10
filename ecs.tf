@@ -18,7 +18,7 @@ resource "aws_ecs_task_definition" "nginx" {
     name        = "${aws_ecs_cluster.ecs_cluster.name}-container",
     image       = "nginx:latest",
     essential   = true,
-    environment = [], # MUCHO IMPORTANTE
+    environment = [],
     portMappings = [{
       protocol      = "tcp",
       containerPort = 80,
@@ -62,7 +62,7 @@ resource "aws_ecs_service" "nginx" {
   name            = "nginx"
   cluster         = aws_ecs_cluster.ecs_cluster.id
   task_definition = aws_ecs_task_definition.nginx.arn
-  desired_count   = 1
+  desired_count   = 3
   launch_type     = "FARGATE"
 
   network_configuration {
